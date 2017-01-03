@@ -8,3 +8,7 @@
 - src: geerlingguy.git
   version: 1.2.1
   name: git
+
+- src: nickp666.android-sdk
+  version: v0.0.7
+  name: android-sdk

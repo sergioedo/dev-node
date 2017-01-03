@@ -7,6 +7,9 @@ Vagrant.configure("2") do |config|
   # Disable VBGuestAdditions update (faster creation)
   # config.vbguest.auto_update = false
 
+  #Accessible ports:
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+
   config.vm.synced_folder "c:/src", "/src"
 
   config.vm.provider "virtualbox" do |vb|
@@ -21,8 +24,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :inline => "echo \"Europe/Madrid\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
   
   # Run Ansible from the Vagrant VM
-  config.vm.provision "ansible_local", run: "always" do |ansible|
-  #config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "playbooks/nodejs.yml"
+  #config.vm.provision "ansible_local", run: "always" do |ansible|
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "playbooks/mobile.yml"
   end
 end
