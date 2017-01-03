@@ -1,5 +1,10 @@
 ---
 - hosts: all
+  tasks:
+    - name: installing repo for Java 8 in Ubuntu
+      apt_repository: repo='ppa:openjdk-r/ppa'
+
+- hosts: all
   gather_facts: yes
   become: yes
   become_user: root
@@ -10,5 +15,9 @@
     - name: monaca
   roles:
     - git
+    - role: "java"
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
     - { role: "nodejs", nodejs_version: '6.x'}
     - { role: "android-sdk" }
