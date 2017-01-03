@@ -3,6 +3,9 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
+  config.vm.hostname = "dev"
+  # Disable VBGuestAdditions update (faster creation)
+  # config.vbguest.auto_update = false
 
   config.vm.synced_folder "c:/src", "/src"
 
@@ -16,5 +19,10 @@ Vagrant.configure("2") do |config|
   # http://unix.stackexchange.com/questions/110522/timezone-setting-in-linux
   # http://manpages.ubuntu.com/manpages/jaunty/man3/DateTime::TimeZone::Catalog.3pm.html
   config.vm.provision :shell, :inline => "echo \"Europe/Madrid\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
-
+  
+  # Run Ansible from the Vagrant VM
+  config.vm.provision "ansible_local", run: "always" do |ansible|
+  #config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "playbooks/nodejs.yml"
+  end
 end
