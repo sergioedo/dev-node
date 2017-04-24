@@ -18,6 +18,7 @@ vagrant ssh
 You can choose between different playbooks:
 
 * nodejs: install git, nodejs
+* java: install git, java, and maven3
 * mobile: install git, java, nodejs, cordova and android sdk
 
 You can edit playbook variables, for example choose nodejs version:

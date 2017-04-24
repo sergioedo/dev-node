@@ -16,3 +16,7 @@
 - src: nickp666.android-sdk
   version: v0.0.7
   name: android-sdk
+
+- src: gantsign.maven
+  version: 3.5.0
+  name: maven

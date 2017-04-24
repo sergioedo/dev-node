@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: installing repo for Java 8 in Ubuntu
+      apt_repository: repo='ppa:openjdk-r/ppa'
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  roles:
+    - git
+    - role: "java"
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+    - { role: maven, maven_version: '3.5.0', maven_install_dir: /opt/maven }

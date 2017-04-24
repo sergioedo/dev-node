@@ -26,6 +26,6 @@ Vagrant.configure("2") do |config|
   # Run Ansible from the Vagrant VM
   #config.vm.provision "ansible_local", run: "always" do |ansible|
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "playbooks/mobile.yml"
+    ansible.playbook = "playbooks/java.yml"
   end
 end
