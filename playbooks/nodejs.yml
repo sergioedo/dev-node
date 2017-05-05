@@ -5,4 +5,4 @@
   become_user: root
   roles:
     - git
-    - { role: "nodejs", nodejs_version: '6.x'}
+    - { role: "nodejs", nodejs_version: '6.x', nodejs_install_npm_user: 'ubuntu'}
