@@ -8,7 +8,9 @@ Vagrant.configure("2") do |config|
   # config.vbguest.auto_update = false
 
   #Accessible ports:
-  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 8000, host: 8000 #dev server
+  config.vm.network "forwarded_port", guest: 53, host: 53, protocol: "tcp" #DNS server
+  config.vm.network "forwarded_port", guest: 53, host: 53, protocol: "udp" #DNS server
 
   config.vm.synced_folder "c:/src", "/src"
 
@@ -26,6 +28,6 @@ Vagrant.configure("2") do |config|
   # Run Ansible from the Vagrant VM
   #config.vm.provision "ansible_local", run: "always" do |ansible|
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "playbooks/mobile.yml"
+    ansible.playbook = "playbooks/docker.yml"
   end
 end

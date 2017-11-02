@@ -1,0 +1,34 @@
+---
+- name: 'Install Python PIP'
+  tags: 'aws-cli'
+  sudo: 'yes'
+  apt: >
+    pkg=python-pip
+    state=latest
+
+- name: 'Install AWS CLI'
+  tags: 'aws-cli'
+  sudo: 'yes'
+  pip: >
+    name=awscli
+    state=latest
+
+- name: 'Create the AWS config directory'
+  tags: 'aws-cli'
+  sudo: 'yes'
+  file: >
+    path=/home/{{ aws_cli_user }}/.aws
+    state=directory
+    owner={{ aws_cli_user }}
+    group={{ aws_cli_user }}
+    mode=0755
+
+- name: 'Copy AWS CLI config'
+  tags: 'aws-cli'
+  sudo: 'yes'
+  template: >
+    src=aws_cli_config.j2
+    dest=/home/{{ aws_cli_user }}/.aws/config
+    owner={{ aws_cli_user }}
+    group={{ aws_cli_user }}
+    mode=0644
